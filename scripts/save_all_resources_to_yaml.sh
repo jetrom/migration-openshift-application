@@ -56,3 +56,4 @@ save_all_resources_to_yaml() {
 
 # Usage: Provide namespace and optional backup directory
 save_all_resources_yaml "$1" "$2"
+
