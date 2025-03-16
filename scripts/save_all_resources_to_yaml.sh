@@ -5,6 +5,8 @@
 
 # needs the Openshift cli tool oc
 # login and access to the old Openshift cluster 
+OC_TOOL="oc"
+
 
 # Predefined list of OpenShift resource types
 RESOURCE_TYPES=(
@@ -32,8 +34,10 @@ NAMESPACE="$1"
 
 BACKUP_DIR="${2:-.}"  # Use provided directory or default to current directory
 
+# Get the directory of the current script
+SCRIPT_DIR=$(dirname "$(realpath "$0")")
 # import util functions
-source ./save_resources_util.sh
+source "$SCRIPT_DIR/save_resources_util.sh"
 
 check_namespace
 

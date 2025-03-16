@@ -4,7 +4,7 @@
 # to different resource yaml files depending on the resource type.
 # It's should be call from a main script with the variable RESOURCE_TYPES
 
-# needs the Openshift cli tool oc
+# needs the Openshift cli tool oc as Variable OC_TOOL
 # login and access to the old Openshift cluster 
 
 check_namespace() {
@@ -17,7 +17,7 @@ check_namespace() {
     fi
     
     # Check if the namespace exists in the cluster
-    oc get namespace "$NAMESPACE" > /dev/null 2>&1
+    $OC_TOOL get namespace "$NAMESPACE" > /dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo "❌ Error: Namespace '$NAMESPACE' does not exist in the OpenShift cluster."
         exit 1
@@ -33,14 +33,19 @@ save_resources_to_yaml() {
     mkdir -p "$BACKUP_DIR"
 
     for resource_type in "${RESOURCE_TYPES[@]}"; do
-        local output_file="${BACKUP_DIR}/${resource_type}s.yaml"  # Plural assumption
+       
+        # Check if a resource exists by querying for the name
+        resource_names=$($OC_TOOL get "$resource_type" -n "$NAMESPACE" -o name 2>/dev/null)
 
-        if oc get "$resource_type" -n "$NAMESPACE" &>/dev/null; then
-            oc get "$resource_type" -n "$NAMESPACE" -o yaml > "$output_file"
-            echo "Saved $resource_type resources to $output_file"
+        if [[ -z "$resource_names" ]]; then
+            echo "No $resource_type found in namespace '$NAMESPACE'. Skipping."
+            continue
         else
-            echo "Warning: No resources of type '$resource_type' found in namespace '$NAMESPACE'."
+            local output_file="${BACKUP_DIR}/${resource_type}s.yaml"
+            $OC_TOOL get "$resource_type" -n "$NAMESPACE" -o yaml > "$output_file"
+            echo "Saved $resource_type resources to $output_file"
         fi
+
     done
 }
 
