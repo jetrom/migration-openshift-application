@@ -3,8 +3,8 @@
 # This script saves the namespace and the quota resources from that namespace
 # to different resource yaml files depending on the resource type.
 
-# needs the Openshift cli tool oc
-# login and access to the old Openshift cluster 
+# Needs the Openshift cli tool oc
+# Login and access to the old Openshift cluster 
 OC_TOOL="oc"
 
 # Predefined list of OpenShift resource types

@@ -2,10 +2,10 @@
 
 # This script is a utility scripts and save defined resources from a namespace
 # to different resource yaml files depending on the resource type.
-# It's should be call from a main script with the variable RESOURCE_TYPES
+# It's should be called from a main script with the variable RESOURCE_TYPES
 
-# needs the Openshift cli tool oc as Variable OC_TOOL
-# login and access to the old Openshift cluster 
+# Needs the Openshift cli tool oc as Variable OC_TOOL
+# Login and access to the old Openshift cluster 
 
 check_namespace() {
 

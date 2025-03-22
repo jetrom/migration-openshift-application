@@ -3,8 +3,8 @@
 # This script saves all relevant resources from a namespace
 # to different resource yaml files depending on the resource type.
 
-# needs the Openshift cli tool oc
-# login and access to the old Openshift cluster 
+# Needs the Openshift cli tool oc
+# Login and access to the old Openshift cluster 
 OC_TOOL="oc"
 
 
