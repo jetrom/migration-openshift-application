@@ -1,6 +1,6 @@
 # Migration of an application to a new openshift cluster
 
-Constains how-tos and scripts for the migrations of an application in a namespace of an Openshift cluster.
+Contains how-tos and scripts for the migrations of an application in a namespace of an Openshift cluster.
 
 ## Backup all relevant resources of an appplication in a namespace
 If resources where created in the old cluster via the Openshift UI and not saved in yaml files then all theses resources have to be downloaded as yaml files.
