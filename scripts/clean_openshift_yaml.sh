@@ -34,7 +34,7 @@ for file in "$BACKUP_DIR"/*.yaml; do
         
         # Use yq to remove the unwanted fields
         for field in "${FIELDS_TO_REMOVE[@]}"; do
-            yq -i "del(.. | select(has(\"$field\")))" "$file"
+           FIELD="$field" yq -i 'del(.. | .[env(FIELD)]?)' "$file"
         done
     fi
 done
